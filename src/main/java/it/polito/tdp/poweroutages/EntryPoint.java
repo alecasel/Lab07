@@ -23,12 +23,10 @@ public class EntryPoint extends Application {
         Scene scene = new Scene(root);
 
         controller = loader.getController();
-    	
-        // TODO impostare il model nel controller   
+    	  
         Model model = new Model();
         controller.setModel(model);
                 
-        
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);
         stage.show();
