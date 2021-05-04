@@ -12,7 +12,7 @@ public class Model {
 
 	private ArrayList<PowerOutage> best;
 	private List<PowerOutage> powerOutageList;
-	
+
 	private int maxAffectedPeople;
 
 	public Model() {
@@ -25,28 +25,29 @@ public class Model {
 
 	/**
 	 * Metodo che sfrutta la ricorsione
+	 * 
 	 * @param nerc
 	 * @param maxYears
 	 * @param maxHours
 	 * @return best
 	 */
 	public List<PowerOutage> findBest(Nerc nerc, int maxYears, int maxHours) {
-		
+
 		/**
 		 * Devo creare una lista per utilizzare il metodo search()
 		 */
 		List<PowerOutage> partial = new ArrayList<>();
-		
+
 		// INIZIALIZZAZIONI (CASO PEGGIORE)
 		powerOutageList = podao.getPwrOutagesByNerc(nerc);
 		best = null;
 		maxAffectedPeople = 0;
-		
+
 		search(partial, maxYears, maxHours);
-		
+
 		return best;
 	}
-	
+
 	/**
 	 * RICORSIONE
 	 * 
@@ -131,12 +132,12 @@ public class Model {
 		 * Importante tener conto che il controllo va fatto se partial è composto da
 		 * almeno due POutages
 		 */
-		
+
 		int difference = 0;
-		
+
 		if (partial.size() >= 2) {
 			int firstYear = partial.get(0).getYear();
-			int lastYear = partial.get(partial.size()-1).getYear();
+			int lastYear = partial.get(partial.size() - 1).getYear();
 			difference = lastYear - firstYear;
 		}
 
@@ -153,8 +154,10 @@ public class Model {
 
 		int sum = 0;
 
-		for (PowerOutage powerOutage : partial) {
-			sum += powerOutage.getDuration();
+		if (partial != null) {
+			for (PowerOutage powerOutage : partial) {
+				sum += powerOutage.getDuration();
+			}
 		}
 
 		return sum;
@@ -162,11 +165,13 @@ public class Model {
 
 	public int affectedPeople(List<PowerOutage> partial) {
 		int sum = 0;
-		
-		for (PowerOutage powerOutage : partial) {
-			sum += powerOutage.getCustomersAffected();
+
+		if (partial != null) {
+			for (PowerOutage powerOutage : partial) {
+				sum += powerOutage.getCustomersAffected();
+			}
 		}
-		
+
 		return sum;
 	}
 

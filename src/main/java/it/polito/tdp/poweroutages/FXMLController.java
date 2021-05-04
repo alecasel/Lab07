@@ -79,13 +79,16 @@ public class FXMLController {
 
 			// Pulisco txtResult e ci metto il risultato dell'algoritmo
 			txtResult.clear();
-			txtResult.appendText("Tot people affected" + model.affectedPeople(rslt) + "\n");
-			txtResult.appendText("Tot hours of outage" + model.sumHours(rslt) + "\n");
+			txtResult.appendText("Tot people affected " + model.affectedPeople(rslt) + "\n");
+			txtResult.appendText("Tot hours of outage " + model.sumHours(rslt) + "\n");
 
-			for (PowerOutage powerOutage : rslt) {
-				txtResult.appendText(powerOutage.getYear() + " " + powerOutage.getStart() + " " + powerOutage.getEnd()
-						+ " " + powerOutage.getDuration() + " " + powerOutage.getCustomersAffected() + "\n");
+			if (rslt != null) {
+				for (PowerOutage powerOutage : rslt) {
+					txtResult.appendText(powerOutage.getYear() + " " + powerOutage.getStart() + " " + powerOutage.getEnd()
+							+ " " + powerOutage.getDuration() + " " + powerOutage.getCustomersAffected() + "\n");
+				}
 			}
+			
 
 		} catch (NumberFormatException e) {
 			txtResult.setText("Insert a valid number of years and of hours");
